@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <title>Radix Sort</title>
+    <style>
+        * {
+    margin: 0%;
+    padding: 0%;
+    outline: none;
+    
+}
+
+/* @font-face {
+    font-family: "Press Start 2P";
+    src: url(PressStart2P-Regular.ttf);
+} */
+
+:root {
+    --game-font: 'Press Start 2P', cursive;
+    --button-background: #25292C;
+}
+
+.head {
+margin-top: 20px;
+margin-right: 20vw;
+margin-left: 20vw;
+text-align: center;
+font-size: 30px;
+background-color: aquamarine;
+color: black;
+border-radius:19px;
+font-weight: bolder;
+}
+body{
+    background: #efefef;
+    min-height: 100vh;
+  }
+.Back .active{
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+    line-height: 40px;
+    border: 1px solid #009688;
+    margin: 40px 5px 0;
+    color: #fff;
+    cursor: pointer;
+    transition: .5s;
+    background: #009688;
+}
+.Back .active:hover{
+    background:black;
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+#top {
+    height: 85vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1px;
+}
+
+.bar {
+    width: 100%;
+    background-color: aqua;
+    height: 750px;
+    transition: 400ms ease-in-out;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.value {
+    font-family: var(--game-font);
+    color: black;
+    margin-top: 1rem;
+    display: none;
+}
+
+#bottom {
+    height: 15vh;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.button {
+    padding: 1rem;
+    font-size: 2rem;
+    background: var(--button-background);
+    cursor: pointer;
+    font-family: var(--game-font);
+}
+    </style>
+</head>
+<body>
+    <ul>
+		<div class="Back">
+	<li><a class="active" href="main.html"><i class="fa-solid fa-arrow-left"></i>BACK</a></li></div>
+</ul>
+<section class="head">Radix Sort</section>
+<br />
+<input type="file" name="inputfile" id="inputfile">
+    <div id='output_array'></div>
+    <main>
+        <div id="top" class="container">
+        </div>
+        <div id="bottom" class="container">
+            <button class="button" id="sort">SORT</button>
+        </div>
+    </main>
+    
+    <script>
+// var sortedListOfIntegers = new Array(12);
+var sortedListOfIntegers =[];
+var locks=0;
+
+        // let n =12;
+  //  let array = new Array(n);
+inputfile.addEventListener("input", function () { 
+ 
+    let file = inputfile.files[0];
+  
+ 
+    let reader = new FileReader();
+  
+ 
+    reader.addEventListener("load", function () { 
+ 
+        let buffer = reader.result.split(/\s+/);
+ 
+ 
+        var numberArray = buffer.map(Number);
+ 
+ 
+ 
+ 
+        sortedListOfIntegers = numberArray;
+  
+        console.log(sortedListOfIntegers);
+
+        output_array.innerHTML = "";
+  
+ 
+       output_array.innerHTML += `Given Array: ${numberArray}`;
+ 
+ 
+    });
+  
+    reader.readAsText(file, "utf-8"); 
+    
+ 
+})
+
+     //   let arr = '<%-arr%>';
+     //   var temp=arr.split(',');
+        let size=sortedListOfIntegers.length;
+        console.log(size);
+        console.log(sortedListOfIntegers);
+const sort = document.getElementById("sort")
+const sortContainer = document.getElementById("top")
+const minimum = 200
+const maximum = 500
+//let sortedListOfIntegers = []
+
+function renderBars(size) {
+
+   // sortedListOfIntegers = temp;
+
+    sortedListOfIntegers.forEach(number => {
+        const bar = document.createElement("div")
+        bar.className = "bar"
+        bar.id = number
+        bar.style.height = `${number* 15}px`
+
+        sortContainer.appendChild(bar)
+    })
+}
+
+
+function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function hideButtons() {
+    sort.style.display = "none"
+}
+
+function showButtons() {
+    sort.style.display = "block"; 
+}
+
+sort.addEventListener("click", async() => {
+    renderBars(size);
+    let speed = 50;
+
+    hideButtons()
+
+    const maxNumber = Math.max(...sortedListOfIntegers) * 10;
+
+    let divisor = 10;
+
+    while (divisor < maxNumber) {
+
+        for (let index = 0; index < sortedListOfIntegers.length; index++) {
+            if (sortedListOfIntegers.length <= 40) {
+                const value = document.createElement("div")
+                value.className = "value"
+                value.textContent = sortedListOfIntegers[index]
+               sortContainer.children[index].appendChild(value)
+            }
+        }
+
+        Array.from(sortContainer.children).map((bar) => bar.style.backgroundColor = "aqua");
+
+        let buckets = Array(10).fill().map(() => []);
+
+        for (let significantDigit of sortedListOfIntegers) {
+
+            buckets[Math.floor((significantDigit % divisor) / (divisor / 10))].push(significantDigit);
+
+            if (divisor == 10 && document.getElementById(significantDigit) != null) {
+                document.getElementById(significantDigit).style.backgroundColor = "green"
+            }
+
+            if (divisor == 100 && document.getElementById(significantDigit) != null) {
+                document.getElementById(significantDigit).style.backgroundColor = "orange"
+            }
+
+            if (divisor == 1000 && document.getElementById(significantDigit) != null) {
+                document.getElementById(significantDigit).style.backgroundColor = "red"
+            }
+
+            await sleep(speed)
+            Array.from(sortContainer.children).map((bar, index) => bar.style.height = `${sortedListOfIntegers[index++]* 15}px`)
+        }
+
+        sortedListOfIntegers = [].concat.apply([], buckets);
+
+        console.table(buckets);
+
+        if (sortedListOfIntegers.length <= 40) {
+            Array.from(sortContainer.children).map((bar) => bar.children[0].remove())
+        }
+
+        await sleep(speed)
+
+        divisor *= 10;
+    }
+
+    Array.from(sortContainer.children).map((bar, index) => bar.style.height = `${sortedListOfIntegers[index++]* 15}px`)
+
+    for (let bar of sortContainer.children) {
+        bar.style.backgroundColor = "green";
+        await sleep(speed)
+    }
+
+    Array.from(sortContainer.children).map((bar) => bar.style.backgroundColor = "aqua");
+
+    for (let index = 0; index < sortedListOfIntegers.length; index++) {
+        if (sortedListOfIntegers.length <= 40) {
+            const value = document.createElement("div")
+            value.className = "value"
+            value.textContent = sortedListOfIntegers[index]
+            sortContainer.children[index].appendChild(value)
+        }
+    }
+    showButtons()
+
+})
+    </script>
+</body>
+
+</html>
