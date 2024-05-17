@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<style>
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    min-height: 100vh;
+    background: #efefef;
+    background-size: cover;
+    background-position: center;
+    
+    font-family: sans-serif;
+}
+
+.Header {
+margin-top: 20px;
+margin-right: 20vw;
+margin-left: 20vw;
+text-align: center;
+font-size: 20px;
+background-color: aquamarine;
+color: black;
+border-radius:19px;
+font-weight: bolder;
+}
+.Header1 {
+margin-top: 20px;
+margin-right: 20vw;
+margin-left: 20vw;
+text-align: center;
+font-size: 15px;
+background-color: aquamarine;
+color: black;
+border-radius:19px;
+
+}
+
+.social-links{
+    text-align: center;
+    
+}
+.social-links li{
+    background: #009688;
+    border-radius: 15px;
+    margin-top: 20px;
+margin-right: 20vw;
+margin-left: 20vw;
+}
+.social-links .active{
+    height: 100%;
+    width: 100px;
+    font-size: 15px;
+    line-height: 40px;
+    border: 1px solid #009688;
+    margin: 40px 5px 0;
+    color: #fff;
+    cursor: pointer;
+    transition: .5s;  
+    font-weight: bolder;
+
+}
+.social-links .active:hover{
+    background: black;
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+<div class="Header">
+    <h1>Algorithm Project</h1>
+
+</div>
+<div class="Header1">
+    <h2>Made by: Muhammad Owais Saiyal </h2>
+
+</div>
+</br>
+</br>
+
+</br>
+
+
+    <ul>
+        <div class="social-links">
+        <li><a class="active" href="bubble.html">Bubble Sort</a></li>
+        <li><a class="active" href="Bucket.html">Bucket Sort</a></li>
+        <li><a class="active" href="counting.html">Counting Sort</a></li>
+        <li><a class="active" href="Heap.html">Heap Sort</a></li>
+        <li><a class="active" href="insertion.html">Insertion Sort</a></li>
+        <li><a class="active" href="Quick.html">Quick Sort</a></li>
+        <li><a class="active" href="merge.html">Merge Sort</a></li>
+        <li><a class="active" href="Radix.html">Radix Sort</a></li>
+        <li><a class="active" href="ModifiedSort.html">ModifiedSort Sort</a></li>
+        <li><a class="active" href="CountRange.html">CountRange Sort</a></li>
+
+        
+    </div>
+    </ul>
+
+<br>
+
+
+<!-- <input type="file" name="inputfile"
+id="inputfile">
+<br>
+
+<pre id="output"></pre> -->
+<!-- <input type="file" name="inputfile" id="inputfile">
+<div id='output_array'></div> -->
+
+<script >
+    let n =20;
+    let array = new Array(n);
+inputfile.addEventListener("input", function () { 
+ 
+    let file = inputfile.files[0];
+  
+ 
+    let reader = new FileReader();
+  
+ 
+    reader.addEventListener("load", function () { 
+ 
+        let buffer = reader.result.split(/\s+/);
+ 
+ 
+        var numberArray = buffer.map(Number);
+ 
+ 
+        console.log(numberArray);
+ 
+ 
+        array = numberArray;
+  
+ 
+        output_array.innerHTML = "";
+  
+ 
+       // output_array.innerHTML += `Given Array: ${array}`;
+ 
+ 
+    });
+  
+    reader.readAsText(file, "utf-8"); 
+ 
+});
+// output_array.innerHTML += `Given Array: ${array}`;
+
+// var values;
+// const $output = document.getElementById('output')
+// document.getElementById('file').onchange = function() {
+//   var file = this.files[0];
+
+//   var reader = new FileReader();
+//   reader.onload = function(progressEvent) {
+//     // Entire file
+//     const text = this.result;
+//     $output.innerText = text
+
+//     // By lines
+//     lines = text.split('\n');
+//    values = lines;
+//     for (var line = 0; line < lines.length; line++) {
+//       console.log(values[line]);
+//     }
+//   };
+//   reader.readAsText(file);
+// };
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
