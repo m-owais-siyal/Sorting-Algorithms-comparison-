@@ -33,11 +33,11 @@ The following sorting algorithms are included in this project:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/sorting-algorithms-comparison.git
+    git clone https://github.com/m-owais-siyal/Sorting-Algorithms-comparison-.git
     ```
 2. Navigate to the project directory:
     ```bash
-    cd sorting-algorithms-comparison
+    cd Sorting-Algorithms-comparison-
     ```
 3. Open `main.html` in your web browser to access the main interface where you can select and view the sorting algorithms.
 
